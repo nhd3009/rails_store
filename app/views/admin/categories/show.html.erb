@@ -1,0 +1,41 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="h3 mb-0">Category Details</h1>
+        </div>
+        <div class="card-body">
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <strong class="text-muted">Name:</strong>
+            </div>
+            <div class="col-sm-9">
+                <%= @category.name %>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <strong class="text-muted">Description:</strong>
+            </div>
+            <div class="col-sm-9">
+                <%= @category.description %>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-sm-3">
+                <strong class="text-muted">Status:</strong>
+            </div>
+            <div class="col-sm-9">
+                <span class="badge <%= @category.active? ? 'bg-success' : 'bg-danger' %>">
+                    <%= @category.active? ? 'Active' : 'Inactive' %>
+                </span>
+            </div>
+        </div>
+        </div>
+        <div class="card-footer">
+            <%= link_to 'Edit', edit_admin_category_path(@category), class: 'btn btn-warning' %>
+            <%= link_to 'Back', admin_categories_path, class: 'btn btn-secondary' %>
+        </div>
+    </div>
+</div>

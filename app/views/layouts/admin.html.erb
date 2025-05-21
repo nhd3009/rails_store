@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Admin Dashboard</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+
+        <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+        <%= javascript_importmap_tags %>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <nav id="sidebar" class="bg-dark text-white">
+                <div class="sidebar-header p-3">
+                    <h3>Admin Panel</h3>
+                </div>
+
+                <ul class="list-unstyled components p-3">
+                    <li class="mb-2">
+                        <%= link_to admin_root_path, class: "text-white text-decoration-none #{current_page?(admin_root_path) ? 'active' : ''}" do %>
+                            <i class="fas fa-tachometer-alt me-2"></i> Dashboard
+                        <% end %>
+                    </li>
+                    <li class="mb-2">
+                        <%= link_to admin_categories_path, class: "text-white text-decoration-none #{current_page?(admin_categories_path) ? 'active' : ''}" do %>
+                            <i class="fas fa-tags me-2"></i> Categories
+                        <% end %>
+                    </li>
+                    <li class="mb-2">
+                        <%= link_to admin_products_path, class: "text-white text-decoration-none #{current_page?(admin_products_path) ? 'active' : ''}" do %>
+                            <i class="fas fa-box me-2"></i> Products
+                        <% end %>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Page Content -->
+            <div id="content">
+                <div class="container-fluid py-4">
+                    <%= yield %>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .wrapper {
+                display: flex;
+                width: 100%;
+                align-items: stretch;
+            }
+
+            #sidebar {
+                min-width: 250px;
+                max-width: 250px;
+                min-height: 100vh;
+                transition: all 0.3s;
+            }
+
+            #sidebar.active {
+                margin-left: -250px;
+            }
+
+            #content {
+                width: 100%;
+                padding: 20px;
+                min-height: 100vh;
+                transition: all 0.3s;
+            }
+
+            #sidebar .components li a {
+                display: block;
+                padding: 10px;
+                border-radius: 5px;
+                transition: all 0.3s;
+            }
+
+            #sidebar .components li a:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                transform: translateX(5px);
+            }
+
+            #sidebar .components li a.active {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+            @media (max-width: 768px) {
+                #sidebar {
+                    margin-left: -250px;
+                }
+                #sidebar.active {
+                    margin-left: 0;
+                }
+            }
+        </style>
+    </body>
+</html>

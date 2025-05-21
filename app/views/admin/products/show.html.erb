@@ -1,0 +1,79 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h1 class="h3 mb-0">Product Details</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                <div id="productImages" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <% @product.images.each_with_index do |image, index| %>
+                            <div class="carousel-item <%= 'active' if index == 0 %>">
+                            <%= image_tag image, class: 'd-block w-100', style: 'max-height: 400px; object-fit: contain;' %>
+                            </div>
+                        <% end %>
+                    </div>
+                    <% if @product.images.count > 1 %>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#productImages" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#productImages" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    <% end %>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <h2 class="h4"><%= @product.name %></h2>
+                    <span class="badge <%= @product.active? ? 'bg-success' : 'bg-danger' %>">
+                        <%= @product.active? ? 'Active' : 'Inactive' %>
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <strong class="text-muted">Category:</strong>
+                    <%= @product.category.name %>
+                </div>
+
+                <div class="mb-3">
+                    <strong class="text-muted">Price:</strong>
+                    <span class="h5 text-primary">
+                    <%= number_to_currency(@product.price) %>
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <strong class="text-muted">Stock:</strong>
+                    <span class="<%= @product.stock <= 10 ? 'text-danger' : 'text-success' %>">
+                    <%= @product.stock %> units
+                    </span>
+                </div>
+
+                <div class="mb-3">
+                    <strong class="text-muted">Description:</strong>
+                    <p class="mt-2"><%= @product.description %></p>
+                </div>
+
+                <div class="mb-3">
+                    <strong class="text-muted">Created:</strong>
+                    <%= @product.created_at.strftime("%B %d, %Y") %>
+                </div>
+
+                <div class="mb-3">
+                    <strong class="text-muted">Last Updated:</strong>
+                    <%= @product.updated_at.strftime("%B %d, %Y") %>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <%= link_to 'Edit', edit_admin_product_path(@product), class: 'btn btn-warning' %>
+            <%= link_to 'Back to Products', admin_products_path, class: 'btn btn-secondary' %>
+        </div>
+    </div>
+</div>
